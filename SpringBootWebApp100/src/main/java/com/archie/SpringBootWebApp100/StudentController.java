@@ -34,8 +34,13 @@ class StudentController {
                                  @RequestParam Optional<Integer> page,
                                  @RequestParam Optional<String> sortBy) {
         return repository.findByName(name.orElse("_"),
-                new PageRequest(page.orElse(0), 5,
+                new PageRequest(page.orElse(0), 15,
                         Sort.Direction.ASC, sortBy.orElse("id")));
+    }
+
+    @GetMapping("/main")
+    public String main() {
+        return "main";
     }
 }
 
