@@ -10,14 +10,10 @@
 package com.archie.SpringBootWebApp100;
 
 
-import com.archie.SpringBootWebApp100.Student;
-import com.archie.SpringBootWebApp100.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
@@ -25,9 +21,9 @@ import java.util.Optional;
 
 @RequiredArgsConstructor //не нужно создавать конструктор
 @RestController
-class StudentController {
+public class StudentController {
 
-    private final StudentRepository repository;
+    private final StudentRepository repository;//должна быть в сервисе
 
     @GetMapping("/student")
     public List<Student> findAll(@RequestParam Optional<String> name,
@@ -41,6 +37,13 @@ class StudentController {
     @GetMapping("/main")
     public String main() {
         return "main";
+    }
+
+    @PutMapping("/criterias")
+    public List<Student> findByCriterias(@RequestBody MyDto myDto) {
+//        return repository.findAll(); //метод сделать сам. приним лист стрингов (из файнд бай критер (дто))
+//    };
+        return new StudentService().helloWorld(myDto); //здесь вызвать метод котор выполн всю логику
     }
 }
 

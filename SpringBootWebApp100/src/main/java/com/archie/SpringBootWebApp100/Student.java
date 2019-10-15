@@ -21,10 +21,11 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @Entity
 class Student {
-    @Id
+    @Id //создать
     @GeneratedValue
     private Long id;
     private String name;
     private String gosNumber;
     private String carBrand;
+
 }
