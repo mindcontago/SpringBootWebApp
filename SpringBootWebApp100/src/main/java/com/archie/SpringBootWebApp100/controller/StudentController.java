@@ -11,10 +11,8 @@ package com.archie.SpringBootWebApp100.controller;
 
 
 import com.archie.SpringBootWebApp100.dto.MyDtoByCriteria;
-import com.archie.SpringBootWebApp100.dto.NewDtoGet;
 import com.archie.SpringBootWebApp100.entity.Student;
 import com.archie.SpringBootWebApp100.repositoty.StudentRepository;
-import com.archie.SpringBootWebApp100.service.GetService;
 import com.archie.SpringBootWebApp100.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +25,12 @@ import java.util.List;
 import java.util.Optional;
 
 
-@RequiredArgsConstructor //не нужно создавать конструктор
+@RequiredArgsConstructor
 @RestController
 public class StudentController {
 
     private final StudentRepository repository;//должна быть в сервисе
 
-    @Autowired
-    GetService getService;
     @Autowired
     StudentService studentService;
 
@@ -42,7 +38,6 @@ public class StudentController {
     public List<Student> findAll(@RequestParam Optional<String> name,
                                  @RequestParam Optional<Integer> page,
                                  @RequestParam Optional<String> sortBy) {
-        //return repository.findByName(name.orElse("_"),
         return repository.findByName(name.orElse("_"),
                 new PageRequest(page.orElse(0), 15,
                         Sort.Direction.ASC, sortBy.orElse("id")));
@@ -53,15 +48,11 @@ public class StudentController {
         return "main";
     }
 
-//    @GetMapping("/getAll") //возвр по методу
-//    public List<Student> findAll(){
-//        return getService.get();
-//    }
 
     @PutMapping("/criterias")
-    public List<Student> findByCriterias(MyDtoByCriteria myDtoByCriteria) {
+    public List<Student> findByCriterias(@RequestBody MyDtoByCriteria myDtoByCriteria) {
 //        return repository.findAll(); //метод сделать сам. приним лист стрингов (из файнд бай критер (дто))
-//    };
+//    };//через репоз
         return studentService.listOfStudents(myDtoByCriteria); //здесь вызвать метод котор выполн всю логику
     }
 }

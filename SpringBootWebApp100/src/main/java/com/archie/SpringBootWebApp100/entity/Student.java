@@ -11,26 +11,25 @@ package com.archie.SpringBootWebApp100.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
-//@NoArgsConstructor
+@NoArgsConstructor
 @Entity
+
 public class Student {
     @Id //создать
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column
     private String name;
+    @Column
     private String gosNumber;
+    @Column
     private String carBrand;
+    @Column //
     private String position;
-
-    public Student(){
-
-    }
 
     public Long getId() {
         return id;
@@ -77,5 +76,16 @@ public class Student {
         this.gosNumber = gosNumber;
         this.carBrand = carBrand;
         this.position = position;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", gosNumber='" + gosNumber + '\'' +
+                ", carBrand='" + carBrand + '\'' +
+                ", position='" + position + '\'' +
+                '}';
     }
 }

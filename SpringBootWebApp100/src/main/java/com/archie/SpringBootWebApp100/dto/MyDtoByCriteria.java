@@ -10,7 +10,7 @@ import java.util.List;
 public class MyDtoByCriteria { //то что сюда впишк то и  будет запрашиваться
     private List<MyCriteria> criterias;
 
-//        @JsonProperty("id_id")
+//        @JsonProperty("id_id") //Пише что в БД булет такое название
 //        private String id;
 //        @JsonProperty("name_name")
 //        private String name;
